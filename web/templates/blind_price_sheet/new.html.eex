@@ -1,0 +1,6 @@
+<h2>New blind price sheet</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: blind_price_sheet_path(@conn, :create) %>
+
+<%= link "Back", to: blind_price_sheet_path(@conn, :index) %>

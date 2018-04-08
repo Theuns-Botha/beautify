@@ -1,0 +1,30 @@
+<h2>Listing blind prices</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Price</th>
+      <th>Matching height</th>
+      <th>Matching width</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for blind_price <- @blind_prices do %>
+    <tr>
+      <td><%= blind_price.price %></td>
+      <td><%= blind_price.matching_height %></td>
+      <td><%= blind_price.matching_width %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: blind_price_path(@conn, :show, blind_price), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: blind_price_path(@conn, :edit, blind_price), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: blind_price_path(@conn, :delete, blind_price), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New blind price", to: blind_price_path(@conn, :new) %>

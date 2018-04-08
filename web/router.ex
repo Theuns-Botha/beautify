@@ -27,6 +27,14 @@ defmodule Beautify.Router do
     resources "/users", UserController, only: [:show, :new, :create]
 
     resources "/sessions", SessionController, only: [:new, :create, :delete]
+
+    resources "/clients", ClientController
+
+    resources "/adresses", AdressController
+
+    resources "/blind_prices", BlindPriceController
+
+    resources "/blind_price_sheets", BlindPriceSheetController
   end
 
   # Other scopes may use custom stacks.

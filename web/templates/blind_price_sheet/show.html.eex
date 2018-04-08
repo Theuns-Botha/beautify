@@ -1,0 +1,13 @@
+<h2>Show blind price sheet</h2>
+
+<ul>
+
+  <li>
+    <strong>Descriptin:</strong>
+    <%= @blind_price_sheet.descriptin %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: blind_price_sheet_path(@conn, :edit, @blind_price_sheet) %>
+<%= link "Back", to: blind_price_sheet_path(@conn, :index) %>

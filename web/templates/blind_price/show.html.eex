@@ -1,0 +1,23 @@
+<h2>Show blind price</h2>
+
+<ul>
+
+  <li>
+    <strong>Price:</strong>
+    <%= @blind_price.price %>
+  </li>
+
+  <li>
+    <strong>Matching height:</strong>
+    <%= @blind_price.matching_height %>
+  </li>
+
+  <li>
+    <strong>Matching width:</strong>
+    <%= @blind_price.matching_width %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: blind_price_path(@conn, :edit, @blind_price) %>
+<%= link "Back", to: blind_price_path(@conn, :index) %>

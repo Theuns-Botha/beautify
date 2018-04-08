@@ -1,0 +1,48 @@
+<h2>Show adress</h2>
+
+<ul>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @adress.description %>
+  </li>
+
+  <li>
+    <strong>Country:</strong>
+    <%= @adress.country %>
+  </li>
+
+  <li>
+    <strong>City:</strong>
+    <%= @adress.city %>
+  </li>
+
+  <li>
+    <strong>Suburb:</strong>
+    <%= @adress.suburb %>
+  </li>
+
+  <li>
+    <strong>Street name:</strong>
+    <%= @adress.street_name %>
+  </li>
+
+  <li>
+    <strong>Building name:</strong>
+    <%= @adress.building_name %>
+  </li>
+
+  <li>
+    <strong>Unit number:</strong>
+    <%= @adress.unit_number %>
+  </li>
+
+  <li>
+    <strong>Postal code:</strong>
+    <%= @adress.postal_code %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: adress_path(@conn, :edit, @adress) %>
+<%= link "Back", to: adress_path(@conn, :index) %>
