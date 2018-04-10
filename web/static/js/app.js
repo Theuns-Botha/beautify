@@ -19,3 +19,12 @@ import "phoenix_html"
 // paths "./socket" or full ones "web/static/js/socket".
 
 // import socket from "./socket"
+$(document).ready(function (){
+	$('#selectionOne').on('change',function() {
+		if ($('#selectionOne').val() == 'Kim Deal'){
+			$('#selectionTwo').fadeIn();
+		} else {
+		$('#selectionTwo').fadeOut();
+		}
+	});
+});

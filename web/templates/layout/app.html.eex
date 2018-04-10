@@ -12,34 +12,60 @@
 </head>
 
 <body>
-  <div class="container">
-    <header class="header">
-      <nav role="navigation">
-        <ul class="nav nav-pills pull-right">
-          <%= if @current_user do %>
-          <li>
-            <%= @current_user.email %> (<%= @current_user.id %>)
-          </li>
-          <li>
-            <%= link "Sign out", to: session_path(@conn, :delete, @current_user), method: "delete" %>
-          </li>
-          <% else %>
-          <li><%= link "Register", to: user_path(@conn, :new) %></li>
-          <li><%= link "Sign in", to: session_path(@conn, :new) %></li>
-          <% end %>
-        </ul>
-      </nav>
-      <span class="logo"></span>
-    </header>
 
-    <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-    <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+    <%= if @current_user do %>
+    <input type="checkbox" id="drawer-toggle" name="drawer-toggle"/>
+    <label for="drawer-toggle" id="drawer-toggle-label"></label>
+    <div>
+      <header>Header</header>
+    </div>
+
+    <nav id="drawer">
+       <ul>
+        <li><a href="<%=page_path(@conn, :index)%>">Home</a></li>
+        <li><a href="<%=client_path(@conn, :index)%>">Clients</a></li>
+        <li><a href="<%=client_path(@conn, :index)%>">Clients</a></li>
+       </ul>
+    </nav>
+
+    <div id="page-content">
+
+    <div>
+      <ul>
+        <li>
+          <%= @current_user.email %> (<%= @current_user.id %>)
+        </li>
+        <li>
+          <%= link "Sign out", to: session_path(@conn, :delete, @current_user), method: "delete" %>
+        </li>
+      </ul>
+    </div>
 
     <main role="main">
       <%= render @view_module, @view_template, assigns %>
     </main>
 
-  </div> <!-- /container -->
-  <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+  </div>
+
+  <% else %>
+  <main role="main">
+    <%= render @view_module, @view_template, assigns %>
+  </main>
+
+  <li><%= link "Register", to: user_path(@conn, :new) %></li>
+  <li><%= link "Sign in", to: session_path(@conn, :new) %></li>
+  <% end %>
+
+   <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
 </body>
+
+<body>
+  <div class="container">
+
+    <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+    <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+
+  </div> <!-- /container -->
+</body>
+
 </html>
