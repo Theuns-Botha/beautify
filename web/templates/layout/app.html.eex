@@ -24,7 +24,7 @@
        <ul>
         <li><a href="<%=page_path(@conn, :index)%>">Home</a></li>
         <li><a href="<%=client_path(@conn, :index)%>">Clients</a></li>
-        <li><a href="<%=client_path(@conn, :index)%>">Clients</a></li>
+        <li><a href="<%=supplier_path(@conn, :index)%>">Suppliers</a></li>
        </ul>
     </nav>
 
