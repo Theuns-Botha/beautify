@@ -17,11 +17,18 @@
     <%= error_tag f, :surname %>
   </div>
 
-  <div class="form-group">
-    <%= label f, :adress, class: "control-label" %>
-    <%= text_input f, :adress, class: "form-control" %>
-    <%= error_tag f, :adress %>
-  </div>
+  <table>
+    <tr>
+      <th>Adresses</th>
+      <th>&nbsp; &nbsp; &nbsp;</th>
+      <th><%= link "Add", to: adress_path(@conn, :new), class: "btn btn-default btn-xs" %></th>
+    </tr>
+    <%= for adress <- @client.adresses do %>
+      <tr>
+        <td><%= adress.street_name %></td>
+      </tr>
+    <% end %>
+  </table>
 
   <div class="form-group">
     <%= submit "Submit", class: "btn btn-primary" %>

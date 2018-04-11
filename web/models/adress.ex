@@ -11,6 +11,9 @@ defmodule Beautify.Adress do
     field :unit_number, :string
     field :postal_code, :string
 
+    belongs_to :client, Beautify.Client
+    belongs_to :supplier, Beautify.Supplier
+
     timestamps()
   end
 

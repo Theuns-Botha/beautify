@@ -4,7 +4,10 @@ defmodule Beautify.Client do
   schema "clients" do
     field :name, :string
     field :surname, :string
-    field :adress, :string
+
+    has_many :adresses, Beautify.Adress
+
+    has_one :primary_adress, Beautify.Adress
 
     timestamps()
   end
@@ -14,7 +17,7 @@ defmodule Beautify.Client do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :surname, :adress])
-    |> validate_required([:name, :surname, :adress])
+    |> cast(params, [:name, :surname])
+    |> validate_required([:name, :surname])
   end
 end

@@ -1,23 +1,29 @@
 <h2>Show client</h2>
 
-<ul>
-
-  <li>
-    <strong>Name:</strong>
-    <%= @client.name %>
-  </li>
-
-  <li>
-    <strong>Surname:</strong>
-    <%= @client.surname %>
-  </li>
-
-  <li>
-    <strong>Adress:</strong>
-    <%= @client.adress %>
-  </li>
-
-</ul>
+<table>
+  <tr>
+    <td><strong>Name:</strong></td>
+    <td>&nbsp; &nbsp; &nbsp;</td>
+    <td><%= @client.name %></td>
+  </tr>
+  <tr>
+    <td><strong>Surname:</strong></td>
+    <td> </td>
+    <td><%= @client.surname %></td>
+  </tr>
+  <tr>
+    <td colspan="3"><strong>Adresses:</strong></td>
+    <td> </td>
+    <td> </td>
+  </tr>
+  <%= for adress <- @client.adresses do %>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td><%= adress.line1 %></td>
+    </tr>
+  <% end %>
+</table>
 
 <%= link "Edit", to: client_path(@conn, :edit, @client) %>
 <%= link "Back", to: client_path(@conn, :index) %>

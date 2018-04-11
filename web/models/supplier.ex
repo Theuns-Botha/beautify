@@ -5,6 +5,10 @@ defmodule Beautify.Supplier do
     field :name, :string
     field :description, :string
 
+    has_many :adresses, Beautify.Adress
+
+    has_one :primary_adress, Beautify.Adress
+
     timestamps()
   end
 

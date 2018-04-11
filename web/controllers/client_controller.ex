@@ -27,13 +27,13 @@ defmodule Beautify.ClientController do
   end
 
   def show(conn, %{"id" => id}) do
-    client = Repo.get!(Client, id)
+    client = Repo.get!(Client, id) |> Repo.preload([:adresses, :primary_adress])
     render(conn, "show.html", client: client)
   end
 
   def edit(conn, %{"id" => id}) do
-    client = Repo.get!(Client, id)
-    changeset = Client.changeset(client)
+    client = Repo.get!(Client, id) |> Repo.preload([:adresses, :primary_adress])
+    changeset = Client.changeset(client) |> IO.inspect()
     render(conn, "edit.html", client: client, changeset: changeset)
   end
 

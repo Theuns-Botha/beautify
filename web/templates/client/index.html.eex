@@ -5,7 +5,6 @@
     <tr>
       <th>Name</th>
       <th>Surname</th>
-      <th>Adress</th>
 
       <th></th>
     </tr>
@@ -15,7 +14,6 @@
     <tr>
       <td><%= client.name %></td>
       <td><%= client.surname %></td>
-      <td><%= client.adress %></td>
 
       <td class="text-right">
         <%= link "Show", to: client_path(@conn, :show, client), class: "btn btn-default btn-xs" %>
