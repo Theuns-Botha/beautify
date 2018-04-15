@@ -23,6 +23,6 @@ defmodule Beautify.Adress do
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:description, :country, :city, :suburb, :street_name, :building_name, :unit_number, :postal_code])
-    |> validate_required([:description, :country, :city, :suburb, :street_name, :building_name, :unit_number, :postal_code])
+    #|> validate_required([:description, :country, :city, :suburb, :street_name, :building_name, :unit_number, :postal_code])
   end
 end

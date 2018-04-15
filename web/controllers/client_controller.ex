@@ -9,7 +9,7 @@ defmodule Beautify.ClientController do
   end
 
   def new(conn, _params) do
-    changeset = Client.changeset(%Client{})
+    changeset = Client.changeset(%Client{adresses: []})
     render(conn, "new.html", changeset: changeset)
   end
 
@@ -17,29 +17,30 @@ defmodule Beautify.ClientController do
     changeset = Client.changeset(%Client{}, client_params)
 
     case Repo.insert(changeset) do
-      {:ok, _client} ->
+      {:ok, client} ->
         conn
         |> put_flash(:info, "Client created successfully.")
-        |> redirect(to: client_path(conn, :index))
+        |> redirect(to: client_path(conn, :show, client))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
   end
 
   def show(conn, %{"id" => id}) do
-    client = Repo.get!(Client, id) |> Repo.preload([:adresses, :primary_adress])
+    client = Repo.get!(Client, id) |> Repo.preload([:adresses])
     render(conn, "show.html", client: client)
   end
 
   def edit(conn, %{"id" => id}) do
-    client = Repo.get!(Client, id) |> Repo.preload([:adresses, :primary_adress])
+    client = Repo.get!(Client, id) |> Repo.preload([:adresses])
     changeset = Client.changeset(client) |> IO.inspect()
     render(conn, "edit.html", client: client, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "client" => client_params}) do
-    client = Repo.get!(Client, id)
+    client = Repo.get!(Client, id) |> Repo.preload([:adresses])
     changeset = Client.changeset(client, client_params)
+    IO.inspect(client_params)
 
     case Repo.update(changeset) do
       {:ok, client} ->

@@ -17,18 +17,37 @@
     <%= error_tag f, :surname %>
   </div>
 
-  <table>
-    <tr>
-      <th>Adresses</th>
-      <th>&nbsp; &nbsp; &nbsp;</th>
-      <th><%= link "Add", to: adress_path(@conn, :new), class: "btn btn-default btn-xs" %></th>
-    </tr>
-    <%= for adress <- @client.adresses do %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+  <%= for adress <- @client.adresses do %>
       <tr>
         <td><%= adress.street_name %></td>
+        <td class="text-right">
+          <%= link "Show", to: client_path(@conn, :show, adress), class: "btn btn-default btn-xs" %>
+          <%= link "Edit", to: client_path(@conn, :edit, adress), class: "btn btn-default btn-xs" %>
+          <%= link "Delete", to: client_path(@conn, :delete, adress), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        </td>
       </tr>
-    <% end %>
+  <% end %>
+    </tbody>
   </table>
+
+  <%= inputs_for f, :adresses, [append: [%Beautify.Adress{}]], fn i -> %>
+  <div class="form-group">
+    <%= label i, :street_name, "Adress ##{i.index + 1}", class: "control-label" %>
+    <%= text_input i, :street_name, class: "form-control" %>
+    <%= link "Delete", to: client_path(@conn, :delete, i), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+    <%= if message = i.errors[:body] do %>
+      <span class="help-block"><%= message %></span>
+    <% end %>
+  </div>
+  <% end %>
 
   <div class="form-group">
     <%= submit "Submit", class: "btn btn-primary" %>

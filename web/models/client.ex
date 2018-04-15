@@ -7,8 +7,6 @@ defmodule Beautify.Client do
 
     has_many :adresses, Beautify.Adress
 
-    has_one :primary_adress, Beautify.Adress
-
     timestamps()
   end
 
@@ -19,5 +17,13 @@ defmodule Beautify.Client do
     struct
     |> cast(params, [:name, :surname])
     |> validate_required([:name, :surname])
+    |> cast_assoc(:adresses, required: false)
   end
+
+  #This changeset is only to be used to get a client_id when "new" client is being created
+  def unvalidated_changeset(struct, params \\ %{}) do
+    struct
+    |> cast(params, [:name, :surname])
+  end
+
 end

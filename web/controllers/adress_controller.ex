@@ -8,19 +8,36 @@ defmodule Beautify.AdressController do
     render(conn, "index.html", adresses: adresses)
   end
 
-  def new(conn, _params) do
-    changeset = Adress.changeset(%Adress{})
+  def new(conn, %Beautify.Client{} = client) do
+    changeset = Adress.changeset(%Adress{client_id: client.id})
     render(conn, "new.html", changeset: changeset)
   end
 
-  def create(conn, %{"adress" => adress_params}) do
+  def new(conn, %Beautify.Supplier{} = supplier) do
+    changeset = Adress.changeset(%Adress{supplier_id: supplier.id})
+    render(conn, "new.html", changeset: changeset)
+  end
+
+  def create(conn, %{adress: %{client_id: client_id} = adress_params}) do
     changeset = Adress.changeset(%Adress{}, adress_params)
 
     case Repo.insert(changeset) do
-      {:ok, _adress} ->
+      {:ok, adress} ->
         conn
         |> put_flash(:info, "Adress created successfully.")
-        |> redirect(to: adress_path(conn, :index))
+        |> redirect(to: client_path(conn, :edit, %{id: client_id}))
+      {:error, changeset} ->
+        render(conn, "new.html", changeset: changeset)
+    end
+  end
+  def create(conn, %{adress: %{supplier_id: supplier_id} = adress_params}) do
+    changeset = Adress.changeset(%Adress{}, adress_params)
+
+    case Repo.insert(changeset) do
+      {:ok, adress} ->
+        conn
+        |> put_flash(:info, "Adress created successfully.")
+        |> redirect(to: client_path(conn, :edit, %{id: supplier_id}))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -33,7 +50,7 @@ defmodule Beautify.AdressController do
 
   def edit(conn, %{"id" => id}) do
     adress = Repo.get!(Adress, id)
-    changeset = Adress.changeset(adress)
+    changeset = Adress.changeset(adress) |> IO.inspect()
     render(conn, "edit.html", adress: adress, changeset: changeset)
   end
 

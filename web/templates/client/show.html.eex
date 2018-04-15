@@ -20,7 +20,7 @@
     <tr>
       <td> </td>
       <td> </td>
-      <td><%= adress.line1 %></td>
+      <td><%= adress.street_name %></td>
     </tr>
   <% end %>
 </table>
