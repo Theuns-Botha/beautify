@@ -8,9 +8,9 @@ defmodule Beautify.AdressController do
     render(conn, "index.html", adresses: adresses)
   end
 
-  def new(conn, %Beautify.Client{} = client) do
-    changeset = Adress.changeset(%Adress{client_id: client.id})
-    render(conn, "new.html", changeset: changeset)
+  def new(conn, %{"client_id" => client_id}) do
+    changeset = Adress.changeset(%Adress{client_id: client_id})
+    render(conn,Beautify.AdressView, "new.ic.html", changeset: changeset, conn: conn)
   end
 
   def new(conn, %Beautify.Supplier{} = supplier) do

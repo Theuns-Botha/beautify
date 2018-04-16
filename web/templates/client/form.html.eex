@@ -35,6 +35,12 @@
         </td>
       </tr>
   <% end %>
+  <tr id="adress_placeholder">
+    <td></td>
+    <td class="text-right">
+      <a ic-get-from="edit/adresses/new" ic-target='#adress_placeholder'>Click Me!</a>
+    </td>
+  </tr>
     </tbody>
   </table>
 

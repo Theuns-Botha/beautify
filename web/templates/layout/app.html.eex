@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://intercoolerreleases-leaddynocom.netdna-ssl.com/intercooler-1.2.1.min.js"></script>
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,51 +14,45 @@
   <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
 </head>
 
+<%= if @current_user do %>
+<input type="checkbox" id="drawer-toggle" name="drawer-toggle"/>
+<label for="drawer-toggle" id="drawer-toggle-label"></label>
+<div>
+  <header>Header</header>
+</div>
+
+<nav id="drawer">
+   <ul>
+    <li><a href="<%=page_path(@conn, :index)%>">Home</a></li>
+    <li><a href="<%=client_path(@conn, :index)%>">Clients</a></li>
+    <li><a href="<%=supplier_path(@conn, :index)%>">Suppliers</a></li>
+   </ul>
+</nav>
+
+<div>
+  <ul>
+    <li>
+      <%= @current_user.email %> (<%= @current_user.id %>)
+    </li>
+    <li>
+      <%= link "Sign out", to: session_path(@conn, :delete, @current_user), method: "delete" %>
+    </li>
+  </ul>
+</div>
+<% else %>
+<li><%= link "Register", to: user_path(@conn, :new) %></li>
+<li><%= link "Sign in", to: session_path(@conn, :new) %></li>
+<% end %>
+
 <body>
+  <div id="page-content">
 
-    <%= if @current_user do %>
-    <input type="checkbox" id="drawer-toggle" name="drawer-toggle"/>
-    <label for="drawer-toggle" id="drawer-toggle-label"></label>
-    <div>
-      <header>Header</header>
-    </div>
+    stuf
 
-    <nav id="drawer">
-       <ul>
-        <li><a href="<%=page_path(@conn, :index)%>">Home</a></li>
-        <li><a href="<%=client_path(@conn, :index)%>">Clients</a></li>
-        <li><a href="<%=supplier_path(@conn, :index)%>">Suppliers</a></li>
-       </ul>
-    </nav>
-
-    <div id="page-content">
-
-    <div>
-      <ul>
-        <li>
-          <%= @current_user.email %> (<%= @current_user.id %>)
-        </li>
-        <li>
-          <%= link "Sign out", to: session_path(@conn, :delete, @current_user), method: "delete" %>
-        </li>
-      </ul>
-    </div>
-
-    <main role="main">
-      <%= render @view_module, @view_template, assigns %>
-    </main>
-
-  </div>
-
-  <% else %>
   <main role="main">
     <%= render @view_module, @view_template, assigns %>
   </main>
-
-  <li><%= link "Register", to: user_path(@conn, :new) %></li>
-  <li><%= link "Sign in", to: session_path(@conn, :new) %></li>
-  <% end %>
-
+  </div>
    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
 </body>
 
