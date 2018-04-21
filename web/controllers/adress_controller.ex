@@ -10,7 +10,18 @@ defmodule Beautify.AdressController do
 
   def new(conn, %{"client_id" => client_id}) do
     changeset = Adress.changeset(%Adress{client_id: client_id})
-    render(conn,Beautify.AdressView, "new.ic.html", changeset: changeset, conn: conn)
+    conn
+    |> put_resp_header("x-ic-trigger", "show-overlay")
+    |> render(Beautify.AdressView, "new.html", changeset: changeset, conn: conn)
+
+    #<a ic-get-from="edit/adresses/new" ic-target='#popup_placeholder' class="btn btn-default btn-xs" ic-success-action="style.visibility = visible">Add Adress</a>
+    #<tr>
+    #  <td></td>
+    #  <td class="text-right">
+    #    <a ic-get-from="edit/adresses/new" ic-target='#popup_placeholder' class="btn btn-default btn-xs" ic-success-action="style.visibility = visible">Add Adress</a>
+    #  </td>
+    #</tr>
+
   end
 
   def new(conn, %Beautify.Supplier{} = supplier) do

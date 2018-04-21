@@ -1,6 +1,6 @@
 <h2>Edit adress</h2>
 
-<%= render "form.ic.html", changeset: @changeset,
+<%= render "form.html", changeset: @changeset,
                         action: adress_path(@conn, :update, @adress) %>
 
 <%= link "Back", to: adress_path(@conn, :index) %>
