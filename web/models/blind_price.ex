@@ -6,6 +6,8 @@ defmodule Beautify.BlindPrice do
     field :matching_height, :integer
     field :matching_width, :integer
 
+    belongs_to :blind_price_sheet, Beautify.BlindPriceSheet
+
     timestamps()
   end
 

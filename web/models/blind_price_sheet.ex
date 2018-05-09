@@ -4,6 +4,10 @@ defmodule Beautify.BlindPriceSheet do
   schema "blind_price_sheets" do
     field :descriptin, :string
 
+    has_many :blind_prices, Beautify.BlindPrice
+
+    belongs_to :supplier, Beautify.Supplier
+
     timestamps()
   end
 

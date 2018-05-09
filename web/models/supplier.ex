@@ -6,6 +6,7 @@ defmodule Beautify.Supplier do
     field :description, :string
 
     has_many :adresses, Beautify.Adress
+    has_many :blind_price_sheets, Beautify.BlindPriceSheet
 
     has_one :primary_adress, Beautify.Adress
 
