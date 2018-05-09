@@ -9,14 +9,15 @@ defmodule Beautify.AdressController do
   end
 
   def new(conn, %{"client" => client_id}) do
-    changeset = Adress.changeset(%Adress{client_id: client_id}) |> IO.inspect()
+    changeset = Adress.changeset(%Adress{client_id: client_id})
     conn
     |> render("new.html", changeset: changeset)
   end
 
-  def new(conn, %Beautify.Supplier{} = supplier) do
-    changeset = Adress.changeset(%Adress{supplier_id: supplier.id})
-    render(conn, "new.html", changeset: changeset)
+  def new(conn, %{"supplier" => supplier_id}) do
+    changeset = Adress.changeset(%Adress{supplier_id: supplier_id})
+    conn
+    |> render("new.html", changeset: changeset)
   end
 
   def create(conn, %{"adress" => adress_params}) do

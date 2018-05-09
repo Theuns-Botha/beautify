@@ -27,18 +27,18 @@ defmodule Beautify.SupplierController do
   end
 
   def show(conn, %{"id" => id}) do
-    supplier = Repo.get!(Supplier, id)
+    supplier = Repo.get!(Supplier, id) |> Repo.preload([:adresses])
     render(conn, "show.html", supplier: supplier)
   end
 
   def edit(conn, %{"id" => id}) do
-    supplier = Repo.get!(Supplier, id)
+    supplier = Repo.get!(Supplier, id) |> Repo.preload([:adresses])
     changeset = Supplier.changeset(supplier)
     render(conn, "edit.html", supplier: supplier, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "supplier" => supplier_params}) do
-    supplier = Repo.get!(Supplier, id)
+    supplier = Repo.get!(Supplier, id) |> Repo.preload([:adresses])
     changeset = Supplier.changeset(supplier, supplier_params)
 
     case Repo.update(changeset) do

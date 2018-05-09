@@ -14,5 +14,7 @@
 
 </ul>
 
+<%= render(Beautify.AdressView, "edit_supplier_index.html", supplier: @supplier, conn: @conn) %>
+
 <%= link "Edit", to: supplier_path(@conn, :edit, @supplier) %>
 <%= link "Back", to: supplier_path(@conn, :index) %>

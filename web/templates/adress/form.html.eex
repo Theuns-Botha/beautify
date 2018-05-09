@@ -6,6 +6,7 @@
   <% end %>
 
   <%= hidden_input(f, :client_id) %>
+  <%= hidden_input(f, :supplier_id) %>
 
   <div class="form-group">
     <%= label f, :description, class: "control-label" %>
