@@ -40,7 +40,6 @@ defmodule Beautify.ClientController do
   def update(conn, %{"id" => id, "client" => client_params}) do
     client = Repo.get!(Client, id) |> Repo.preload([:adresses])
     changeset = Client.changeset(client, client_params)
-    IO.inspect(client_params)
 
     case Repo.update(changeset) do
       {:ok, client} ->

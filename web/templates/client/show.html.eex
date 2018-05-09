@@ -12,7 +12,7 @@
     <td><%= @client.surname %></td>
   </tr>
 
-  <%= render(Beautify.AdressView, "client_index.html", client: @client, adresses: @client.adresses, conn: @conn) %>
+  <%= render(Beautify.AdressView, "edit_client_index.html", client: @client, conn: @conn) %>
 
 <%= link "Edit", to: client_path(@conn, :edit, @client) %>
 <%= link "Back", to: client_path(@conn, :index) %>

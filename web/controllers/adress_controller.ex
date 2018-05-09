@@ -8,20 +8,10 @@ defmodule Beautify.AdressController do
     render(conn, "index.html", adresses: adresses)
   end
 
-  def new(conn, %{"client_id" => client_id}) do
-    changeset = Adress.changeset(%Adress{client_id: client_id})
+  def new(conn, %{"client" => client_id}) do
+    changeset = Adress.changeset(%Adress{client_id: client_id}) |> IO.inspect()
     conn
-    |> put_resp_header("x-ic-trigger", "show-overlay")
-    |> render(Beautify.AdressView, "new.html", changeset: changeset, conn: conn)
-
-    #<a ic-get-from="edit/adresses/new" ic-target='#popup_placeholder' class="btn btn-default btn-xs" ic-success-action="style.visibility = visible">Add Adress</a>
-    #<tr>
-    #  <td></td>
-    #  <td class="text-right">
-    #    <a ic-get-from="edit/adresses/new" ic-target='#popup_placeholder' class="btn btn-default btn-xs" ic-success-action="style.visibility = visible">Add Adress</a>
-    #  </td>
-    #</tr>
-
+    |> render("new.html", changeset: changeset)
   end
 
   def new(conn, %Beautify.Supplier{} = supplier) do
@@ -29,27 +19,20 @@ defmodule Beautify.AdressController do
     render(conn, "new.html", changeset: changeset)
   end
 
-  def create(conn, %{adress: %{client_id: client_id} = adress_params}) do
+  def create(conn, %{"adress" => adress_params}) do
     changeset = Adress.changeset(%Adress{}, adress_params)
-
     case Repo.insert(changeset) do
       {:ok, adress} ->
-        conn
-        |> put_flash(:info, "Adress created successfully.")
-        |> redirect(to: client_path(conn, :edit, %{id: client_id}))
-      {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
-    end
-  end
-  def create(conn, %{adress: %{supplier_id: supplier_id} = adress_params}) do
-    changeset = Adress.changeset(%Adress{}, adress_params)
+        redirect_url = cond do
+          adress.client_id != nil -> client_path(conn, :edit, adress.client_id)
+          adress.supplier_id != nil -> supplier_path(conn, :edit, adress.supplier_id)
+        end
 
-    case Repo.insert(changeset) do
-      {:ok, adress} ->
         conn
         |> put_flash(:info, "Adress created successfully.")
-        |> redirect(to: client_path(conn, :edit, %{id: supplier_id}))
+        |> redirect(to: redirect_url)
       {:error, changeset} ->
+        IO.inspect("not successfully stored")
         render(conn, "new.html", changeset: changeset)
     end
   end
@@ -71,9 +54,14 @@ defmodule Beautify.AdressController do
 
     case Repo.update(changeset) do
       {:ok, adress} ->
+        redirect_url = cond do
+          adress.client_id != nil -> client_path(conn, :edit, adress.client_id)
+          adress.supplier_id != nil -> supplier_path(conn, :edit, adress.supplier_id)
+        end
+
         conn
         |> put_flash(:info, "Adress updated successfully.")
-        |> redirect(to: adress_path(conn, :show, adress))
+        |> redirect(to: redirect_url)
       {:error, changeset} ->
         render(conn, "edit.html", adress: adress, changeset: changeset)
     end
@@ -88,6 +76,20 @@ defmodule Beautify.AdressController do
 
     conn
     |> put_flash(:info, "Adress deleted successfully.")
-    |> redirect(to: adress_path(conn, :index))
+    |> redirect_to_back()
   end
+
+  def redirect_to_back(conn) do
+    path =
+      conn
+      |> Plug.Conn.get_req_header("referer")
+      |> Enum.fetch!(0)
+      |> URI.parse
+      |> Map.get(:path)
+
+    conn
+    #|> assign(:refer_path, path)
+    |> redirect(to: path)
+  end
+
 end

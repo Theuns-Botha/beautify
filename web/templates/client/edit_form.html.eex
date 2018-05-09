@@ -17,7 +17,7 @@
     <%= error_tag f, :surname %>
   </div>
 
-  <%= render(Beautify.AdressView, "client_index.html", client: @client, adresses: @client.adresses, conn: @conn) %>
+  <%= render(Beautify.AdressView, "client_index.html", client: @client, conn: @conn) %>
 
   <div class="form-group">
     <%= submit "Submit", class: "btn btn-primary" %>

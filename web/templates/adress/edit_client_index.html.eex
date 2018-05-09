@@ -11,8 +11,6 @@
       <th>Building name</th>
       <th>Unit number</th>
       <th>Postal code</th>
-
-      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -26,12 +24,6 @@
       <td><%= adress.building_name %></td>
       <td><%= adress.unit_number %></td>
       <td><%= adress.postal_code %></td>
-
-      <td class="text-right">
-        <%= link "Show", to: adress_path(@conn, :show, adress), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: adress_path(@conn, :edit, adress), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: adress_path(@conn, :delete, adress), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
-      </td>
     </tr>
 <% end %>
   </tbody>
@@ -39,5 +31,3 @@
 
 <div id="popup_placeholder">
 </div>
-
-<%= link "New adress", to: adress_path(@conn, :new, client: @client) %>
