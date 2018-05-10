@@ -13,6 +13,14 @@
 // to also remove its path from "config.paths.watched".
 import "phoenix_html"
 
+//require("handsontable");
+//require("someJSlibrary");
+
+//<script src="/handsontable/dist/handsontable.full.js"></script>
+
+//<link rel="stylesheet" media="screen" href="/handsontable/dist/handsontable.full.css">
+
+
 // Import local files
 //
 // Local files can be imported directly using relative
