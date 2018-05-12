@@ -1,0 +1,8 @@
+<tr>
+  <td><%= @adress.street_name %></td>
+  <td class="text-right">
+    <%= link "Show", to: client_path(@conn, :show, @adress), class: "btn btn-default btn-xs" %>
+    <%= link "Edit", to: client_path(@conn, :edit, @adress), class: "btn btn-default btn-xs" %>
+    <%= link "Delete", to: client_path(@conn, :delete, @adress), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+  </td>
+</tr>

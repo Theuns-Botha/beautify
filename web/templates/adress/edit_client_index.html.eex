@@ -1,0 +1,33 @@
+<h2>Listing adresses</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Country</th>
+      <th>City</th>
+      <th>Suburb</th>
+      <th>Street name</th>
+      <th>Building name</th>
+      <th>Unit number</th>
+      <th>Postal code</th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for adress <- @client.adresses do %>
+    <tr>
+      <td><%= adress.description %></td>
+      <td><%= adress.country %></td>
+      <td><%= adress.city %></td>
+      <td><%= adress.suburb %></td>
+      <td><%= adress.street_name %></td>
+      <td><%= adress.building_name %></td>
+      <td><%= adress.unit_number %></td>
+      <td><%= adress.postal_code %></td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<div id="popup_placeholder">
+</div>

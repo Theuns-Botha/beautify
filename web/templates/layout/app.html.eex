@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://intercoolerreleases-leaddynocom.netdna-ssl.com/intercooler-1.2.1.min.js"></script>
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,37 +13,58 @@
 
   <title>Hello Beautify!</title>
   <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+
 </head>
 
+<%= if @current_user do %>
+<input type="checkbox" id="drawer-toggle" name="drawer-toggle"/>
+<label for="drawer-toggle" id="drawer-toggle-label"></label>
+<div>
+  <header>Header</header>
+</div>
+
+<nav id="drawer">
+   <ul>
+    <li><a href="<%=page_path(@conn, :index)%>">Home</a></li>
+    <li><a href="<%=client_path(@conn, :index)%>">Clients</a></li>
+    <li><a href="<%=supplier_path(@conn, :index)%>">Suppliers</a></li>
+    <li><a href="<%=blind_price_sheet_path(@conn, :index)%>">Price Sheets</a></li>
+   </ul>
+</nav>
+
+<div>
+  <ul>
+    <li>
+      <%= @current_user.email %> (<%= @current_user.id %>)
+    </li>
+    <li>
+      <%= link "Sign out", to: session_path(@conn, :delete, @current_user), method: "delete" %>
+    </li>
+  </ul>
+</div>
+<% else %>
+<li><%= link "Register", to: user_path(@conn, :new) %></li>
+<li><%= link "Sign in", to: session_path(@conn, :new) %></li>
+<% end %>
+
 <body>
+
+  <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+
+
   <div class="container">
-    <header class="header">
-      <nav role="navigation">
-        <ul class="nav nav-pills pull-right">
-          <%= if @current_user do %>
-          <li>
-            <%= @current_user.email %> (<%= @current_user.id %>)
-          </li>
-          <li>
-            <%= link "Sign out", to: session_path(@conn, :delete, @current_user), method: "delete" %>
-          </li>
-          <% else %>
-          <li><%= link "Register", to: user_path(@conn, :new) %></li>
-          <li><%= link "Sign in", to: session_path(@conn, :new) %></li>
-          <% end %>
-        </ul>
-      </nav>
-      <span class="logo"></span>
-    </header>
 
     <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
     <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
-    <main role="main">
-      <%= render @view_module, @view_template, assigns %>
-    </main>
-
   </div> <!-- /container -->
-  <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+
+  <div id="page-content">
+  <main role="main">
+    <%= render @view_module, @view_template, assigns %>
+  </main>
+  </div>
+
 </body>
+
 </html>

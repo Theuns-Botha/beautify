@@ -1,0 +1,20 @@
+<h2>Show supplier</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @supplier.name %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @supplier.description %>
+  </li>
+
+</ul>
+
+<%= render(Beautify.AdressView, "edit_supplier_index.html", supplier: @supplier, conn: @conn) %>
+
+<%= link "Edit", to: supplier_path(@conn, :edit, @supplier) %>
+<%= link "Back", to: supplier_path(@conn, :index) %>

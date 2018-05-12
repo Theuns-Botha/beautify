@@ -1,0 +1,26 @@
+<h2>Listing blind price sheets</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Descriptin</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for blind_price_sheet <- @blind_price_sheets do %>
+    <tr>
+      <td><%= blind_price_sheet.descriptin %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: blind_price_sheet_path(@conn, :show, blind_price_sheet), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: blind_price_sheet_path(@conn, :edit, blind_price_sheet), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: blind_price_sheet_path(@conn, :delete, blind_price_sheet), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New blind price sheet", to: blind_price_sheet_path(@conn, :new) %>

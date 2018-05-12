@@ -1,0 +1,43 @@
+<h2>Listing adresses</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Country</th>
+      <th>City</th>
+      <th>Suburb</th>
+      <th>Street name</th>
+      <th>Building name</th>
+      <th>Unit number</th>
+      <th>Postal code</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for adress <- @adresses do %>
+    <tr>
+      <td><%= adress.description %></td>
+      <td><%= adress.country %></td>
+      <td><%= adress.city %></td>
+      <td><%= adress.suburb %></td>
+      <td><%= adress.street_name %></td>
+      <td><%= adress.building_name %></td>
+      <td><%= adress.unit_number %></td>
+      <td><%= adress.postal_code %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: adress_path(@conn, :show, adress), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: adress_path(@conn, :edit, adress), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: adress_path(@conn, :delete, adress), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<div id="popup_placeholder">
+</div>
+
+<%= link "New adress", to: adress_path(@conn, :new) %>

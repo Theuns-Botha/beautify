@@ -1,0 +1,85 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= label f, :descriptin, class: "control-label" %>
+    <%= text_input f, :descriptin, class: "form-control" %>
+    <%= error_tag f, :descriptin %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :descriptin, class: "control-label" %>
+    <%= text_input f, :descriptin, class: "form-control" %>
+    <%= error_tag f, :descriptin %>
+  </div>
+
+    <div id="mytable">
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jexcel/1.3.4/js/jquery.jexcel.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jexcel/1.3.4/css/jquery.jexcel.css" type="text/css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handsontable/2.0.0/handsontable.js"></script>
+    <link rel="stylesheet" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-handsontable/0.10.2/jquery.handsontable.css" />
+
+
+    <script>
+      /*var myElement = $('#mytable');
+
+      myElement.onpaste = function(e) {
+      var pastedText = undefined;
+      if (window.clipboardData && window.clipboardData.getData) { // IE
+        pastedText = window.clipboardData.getData('Text');
+      } else if (e.clipboardData && e.clipboardData.getData) {
+        pastedText = e.clipboardData.getData('text/plain');
+      }
+
+      console.log(pastedText);
+
+      var lines = pastedText.split("\n");
+
+      console.log(lines);
+
+      var data = [];
+
+      for(i in lines){
+        data[i] = lines[i].split("\t");
+      }
+
+      //$('#mytable').jexcel({ data:data });
+
+      //return false; // Prevent the default handler from running.
+      };*/
+
+      //$('#mytable').jexcel({ data: [[" ", " "],[" ", " "]]});
+
+      var data = [[" ", " "],[" ", " "]];
+
+      var container = document.getElementById('mytable');
+      var hot = new Handsontable(container, {
+      data: data,
+      rowHeaders: true,
+      colHeaders: true,
+      afterChange: function (change, source) {
+
+      console.log(change);
+      console.log(source);
+
+      }
+      });
+
+    </script>
+
+  <button class="btn btn-primary">sdfdf</button>
+
+  <div class="form-group">
+    <%= submit "Submit", class: "btn btn-primary" %>
+  </div>
+
+<% end %>
