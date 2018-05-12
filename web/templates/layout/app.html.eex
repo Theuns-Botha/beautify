@@ -28,6 +28,7 @@
     <li><a href="<%=page_path(@conn, :index)%>">Home</a></li>
     <li><a href="<%=client_path(@conn, :index)%>">Clients</a></li>
     <li><a href="<%=supplier_path(@conn, :index)%>">Suppliers</a></li>
+    <li><a href="<%=blind_price_sheet_path(@conn, :index)%>">Price Sheets</a></li>
    </ul>
 </nav>
 
