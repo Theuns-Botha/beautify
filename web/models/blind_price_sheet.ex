@@ -17,6 +17,7 @@ defmodule Beautify.BlindPriceSheet do
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:descriptin])
+    |> cast_assoc(:blind_prices)
     |> validate_required([:descriptin])
   end
 end

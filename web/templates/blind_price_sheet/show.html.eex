@@ -7,7 +7,40 @@
     <%= @blind_price_sheet.descriptin %>
   </li>
 
+  <div id="mytable">
+  </div>
+
+  <input id="array-string" hidden=true value="<%= @price_array_json %>" ></input>
+
 </ul>
 
 <%= link "Edit", to: blind_price_sheet_path(@conn, :edit, @blind_price_sheet) %>
 <%= link "Back", to: blind_price_sheet_path(@conn, :index) %>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handsontable/2.0.0/handsontable.js"></script>
+<link rel="stylesheet" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-handsontable/0.10.2/jquery.handsontable.css" />
+
+<script>
+
+  var string = document.getElementById('array-string').value;
+
+  var data = JSON.parse(string);
+
+  var container = document.getElementById('mytable');
+  var hot = new Handsontable(container, {
+  data: data,
+  rowHeaders: true,
+  colHeaders: true
+  });
+
+  hot.updateSettings({
+    readOnly: true, // make table cells read-only
+    contextMenu: false, // disable context menu to change things
+    disableVisualSelection: true, // prevent user from visually selecting
+    manualColumnResize: false, // prevent dragging to resize columns
+    manualRowResize: false, // prevent dragging to resize rows
+    comments: false // prevent editing of comments
+  });
+
+</script>
