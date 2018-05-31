@@ -52,6 +52,8 @@ defmodule Beautify.Web do
       import Beautify.Router.Helpers
       import Beautify.ErrorHelpers
       import Beautify.Gettext
+      import Beautify.InputHelpers #Add this line
+
     end
   end
 
